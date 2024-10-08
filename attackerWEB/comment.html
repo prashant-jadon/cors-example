@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Vulnerability Example</title>
+</head>
+<body>
+    <h1>XSS Vulnerability Example</h1>
+    <form method="GET" action="">
+        <label for="userInput">Enter some text:</label>
+        <input type="text" id="userInput" name="userInput" />
+        <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Your Input:</h2>
+    <div id="output">
+        <!-- Vulnerable to XSS -->
+        <script>
+            // Retrieve the user input from the URL parameters (simulating form submission)
+            const urlParams = new URLSearchParams(window.location.search);
+            const userInput = urlParams.get('userInput');
+
+            // Output the user input directly without sanitization
+            document.getElementById('output').innerHTML = userInput;
+        </script>
+    </div>
+</body>
+</html>
